@@ -12,6 +12,7 @@
 	animation-duration: 2s;
 	animation-timing-function: ease;
 	animation-iteration-count: infinite;
+	filter: drop-shadow(7px 7px 8px #AAA);
 }
 
 .fuwafuwa-1{
@@ -36,6 +37,10 @@
 .selected{ z-index:3 }
 
 #selected-source-detail{
+	display: flex;
+	overflow: hidden;
+	justify-content: center;
+	align-items: flex-end;
 	position: fixed;
 	transform-origin: 50% 50%;
 	z-index: 2;
@@ -45,6 +50,25 @@
 	background-color:#FFF;
 }
 
+#selected-source-detail > button {
+	width:80%;
+	min-width:8em;
+	background-color:#139bd5;
+	border:none;
+	color:#fff;
+	padding:0.6em;
+	margin:1em;
+	border-radius:2em;
+	font-size:2em;
+	transition-duration: 0.4s;
+	transform-origin: top;
+	box-shadow: 5px 5px 12px #AAA;
+}
+#selected-source-detail > button:active{
+	width:70%;
+	padding:0.3em;
+	margin-bottom:1.5em;
+}
 
 #source-overlay{
 	position: fixed;
