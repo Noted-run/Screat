@@ -1,4 +1,4 @@
-const standardWidth = 480
+const standardWidth = 440
 
 const sourceObjectOuter = document.getElementById("source-select-outer")
 const sourceSelecterContainerList = document.querySelectorAll('.source-selecter-container')
@@ -6,64 +6,92 @@ const sourceSelecterList = document.querySelectorAll('.source-selecter')
 const sourceDetail = document.getElementById('selected-source-detail')
 const overlay = document.getElementById('source-overlay')
 // 現在選択中のソース
-let selectedSource = null
+let selectedSourceIndex = -1
+let selectedRect = null
 
 /**
  * 画面サイズを調整
  */
 fitWindowSize = (event) => {
-	sourceObjectOuter.style.height = `${parseInt(window.innerWidth / standardWidth * window.innerHeight)}px`
+	sourceObjectOuter.style.height = `${parseInt(parseInt(window.innerWidth / standardWidth *  window.innerHeight))}px`
 }
 
 /**
  * 選択確認画面を表示
  */
 const confirmSource = (index)=>{
+	if(index != selectedSourceIndex){
+		selectedRect = sourceSelecterContainerList[index].getBoundingClientRect()
+		sourceSelecterContainerList[index].animate(
+			[
+				{width:`${selectedRect.width}px`,transform:'translate(0,0)', margin:`0`},
+				{width:'40%',transform:`translate(${-1 * selectedRect.x}px,${-1 * selectedRect.y}px)`,margin:`30px 30% 0 30%`}
+
+			],{
+			duration: 600,
+			easing: 'linear',
+			fill: 'forwards',
+			iterations: 1
+			}
+		)
+		
+		// ソース説明のアニメーション
+		sourceDetail.style.top = `${parseInt(selectedRect.y + + selectedRect.height / 2)}px`
+		sourceDetail.style.left = `${parseInt(selectedRect.x + selectedRect.width / 2)}px`
+		sourceDetail.animate(
+			[
+				{width:`${0}px`, height:`${0}px`, margin:`0`, transform:'translate(0,0)'},
+				{width:`${80}%`,height:`${50}%`, margin:`140px 10% 0 10%`, transform:`translate(${-1 * (selectedRect.x + + selectedRect.width / 2)}px,${-1 * (selectedRect.y + + selectedRect.height / 2)}px)`},
+			],{
+			duration: 600,
+			easing: 'linear',
+			fill: 'forwards'
+			}
+		)
 	
-	const targetRect = sourceSelecterContainerList[index].getBoundingClientRect()
-	const detailRect = sourceDetail.getBoundingClientRect()
-	// ソースの本体のアニメーション
-	const targetMagnif = (window.innerWidth * 0.5 / targetRect.width) .toFixed(1) //拡大比率
-	const targetMoveX = parseInt(window.innerWidth / 2 - ( targetRect.x + targetRect.width / 2))
-	const targetMoveY = parseInt(window.innerHeight / 3 - ( targetRect.y + targetRect.height / 2))
-	
-	sourceSelecterList[index].animate(
+		overlay.classList.add('visible')
+		
+		sourceSelecterContainerList[index].classList.add('selected')
+
+		selectedSourceIndex  = index //対象を記録
+	}
+}
+
+overlay.onclick = () => {
+	overlay.classList.remove('visible')
+
+	sourceSelecterContainerList[selectedSourceIndex].animate(
 		[
-			{transform: 'translate(0,0) scale(1)'},
-			{transform: `translate(${targetMoveX}px,${ targetMoveY}px) scale(${targetMagnif})`},
+			{width:'40%',transform:`translate(${-1 * selectedRect.x}px,${-1 * selectedRect.y}px)`,margin:`30px 22% 0 22%`},
+			{width:`${selectedRect.width}px`,transform:'translate(0,0)', margin:`0`}
+
+		],{
+		duration: 600,
+    	easing: 'linear',
+    	fill: 'forwards',
+		iterations: 1
+		}
+	)
+
+	sourceDetail.animate(
+		[
+			{width:`${80}%`,height:`${50}%`, margin:`140px 10% 0 10%`, transform:`translate(${-1 * (selectedRect.x + + selectedRect.width / 2)}px,${-1 * (selectedRect.y + + selectedRect.height / 2)}px)`},
+			{width:`${0}px`, height:`${0}px`, margin:`0`, transform:'translate(0,0)'},
 		],{
 		duration: 600,
     	easing: 'linear',
     	fill: 'forwards'
 		}
 	)
+
+	sourceSelecterContainerList[selectedSourceIndex].classList.remove('selected')
+	selectedSourceIndex = -1
 	
-	// ソース説明のアニメーション
-	sourceDetail.style.top = `${parseInt(targetRect.y  - targetRect.height * targetMagnif/ 2)}px`
-	sourceDetail.style.left = `${parseInt(targetRect.x - targetRect.width * targetMagnif / 2)}px`
-	const detailMoveX = parseInt(targetMoveX)
-	const detailMoveY  = parseInt(targetMoveY + targetRect.height * targetMagnif - ( detailRect.y + detailRect.height / 2))
-	console.log(targetRect.height)
-	sourceDetail.animate(
-		[
-			{transform: `translate(0,0) scale(0) `},
-			{transform: `translate(${detailMoveX}px,${detailMoveY}px) scale(1)`},
-		],{
-		duration: 800,
-    	easing: 'ease-in-out',
-    	fill: 'forwards'
-		}
-	)
-	
-	sourceDetail.classList.add('visible')
-	overlay.classList.add('visible')
-	
-	sourceSelecterContainerList[index].classList.add('selected')
-	selectedSource = sourceSelecterContainerList[index] //対象を記録
+
 }
 
 for(let i = 0; i < sourceSelecterContainerList.length; i++){
-	sourceSelecterContainerList[i].classList.add(`fuwafuwa-${i % 5 + 1}`)
+	sourceSelecterList[i].classList.add(`fuwafuwa-${i % 5 + 1}`)
 	sourceSelecterContainerList[i].onclick = ((index) => {
 		return () => {
 			confirmSource(index)

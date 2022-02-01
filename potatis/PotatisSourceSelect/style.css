@@ -5,13 +5,13 @@
 
 .source-selecter-container{
 	position:absolute;
-	display: block;
-	transform-origin: center;
+	z-index:0;
+}
+
+.source-selecter{
 	animation-duration: 2s;
 	animation-timing-function: ease;
 	animation-iteration-count: infinite;
-	transition-duration: 0.3s;
-	z-index:0;
 }
 
 .fuwafuwa-1{
@@ -33,30 +33,18 @@
 	animation-delay: 0.2s;
 }
 
-.selected{
-	position:fixed;
-	animation-iteration-count: 1;
-	animation-timing-function: linear;
-	animation-fill-mode: forwards;
-	animation-duration: 1s;
-	z-index:3
-	
-}
+.selected{ z-index:3 }
 
 #selected-source-detail{
 	position: fixed;
 	transform-origin: 50% 50%;
-	display:none;
 	z-index: 2;
 	width: 80%;
-	height:60%;
+	height:0;
 	border-radius: 2em;
 	background-color:#FFF;
 }
 
-#selected-source-detail.visible{
-	display:block;
-}
 
 #source-overlay{
 	position: fixed;
@@ -72,8 +60,6 @@
 	display: block;
 	opacity:1;
 }
-
-
 
 
 @keyframes fuwafuwa1 {
