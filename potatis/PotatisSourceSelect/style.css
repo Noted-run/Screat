@@ -7,6 +7,8 @@
 	position:absolute;
 	z-index:0;
 	transition-duration: 0.8s;
+	transition-timing-function: linear;
+	will-change: transform;
 }
 
 .source-selecter{
@@ -51,6 +53,7 @@
 	background-color:#FFF;
 	transition-duration: 0.8s;
 	will-change: transform;
+	transition-timing-function: linear;
 }
 
 #selected-source-detail > button {
