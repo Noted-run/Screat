@@ -39,14 +39,21 @@ const confirmSource = (index)=>{
 		sourceDetail.style.transitionDelay = `0s`
 		sourceDetail.style.top = `${parseInt(selectedRect.y + + selectedRect.height / 2)}px`
 		sourceDetail.style.left = `${parseInt(selectedRect.x + selectedRect.width / 2)}px`
-		
-		sourceDetail.style.transitionDuration = `0.9s`
-		sourceDetail.style.transitionDelay = `0.2s`
-		sourceDetail.style.width = `${80}%`
-		sourceDetail.style.height = `${50}%`
-		sourceDetail.style.margin = `140px 10% 0 10%`
-		sourceDetail.style.transform = `translate(${-1 * (selectedRect.x + + selectedRect.width / 2)}px,${-1 * (selectedRect.y + + selectedRect.height / 2)}px)`
-	
+
+		sourceDetail.style.transitionDuration = `0s`
+		sourceDetail.style.transitionDelay = `0s`
+		sourceDetail.style.width = `0%`
+		sourceDetail.style.height = `0%`
+		setTimeout(() => {
+			sourceSelecterContainerList[index].style.width = '40%'
+			sourceSelecterContainerList[index].style.transform = `translate(${-1 * selectedRect.x}px,${-1 * selectedRect.y}px)`
+			sourceSelecterContainerList[index].style.margin = `30px 30% 0 30%`
+			sourceDetail.style.transitionDuration = `0.8s`
+			sourceDetail.style.width = `${80}%`
+			sourceDetail.style.height = `${50}%`
+			sourceDetail.style.margin = `140px 10% 0 10%`
+			sourceDetail.style.transform = `translate(${-1 * (selectedRect.x + + selectedRect.width / 2)}px,${-1 * (selectedRect.y + + selectedRect.height / 2)}px)`
+		}, 50);
 		overlay.classList.add('visible')
 		sourceSelecterContainerList[index].classList.add('selected')
 
@@ -64,13 +71,15 @@ overlay.onclick = () => {
 	sourceSelecterContainerList[selectedSourceIndex].style.width = `${selectedRect.width}px`
 	sourceSelecterContainerList[selectedSourceIndex].style.transform = `translate(0,0)`
 	sourceSelecterContainerList[selectedSourceIndex].style.margin = `0`
+
+	sourceDetail.style.transitionDuration = `0s`
+	sourceDetail.style.transitionDelay = `0.1s`
 	
 	sourceDetail.style.width = `${0}px`
 	sourceDetail.style.height = `${0}px`
 	sourceDetail.style.margin = `0`
 	sourceDetail.style.transform = 'translate(0,0)'
 	isSelectedMode = false
-
 }
 
 for(let i = 0; i < sourceSelecterContainerList.length; i++){
