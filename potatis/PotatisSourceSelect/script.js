@@ -46,18 +46,18 @@ const confirmSource = (index)=>{
 		)
 		
 		// ソース説明のアニメーション
-		sourceDetail.style.top = `${parseInt(selectedRect.y + + selectedRect.height / 2)}px`
-		sourceDetail.style.left = `${parseInt(selectedRect.x + selectedRect.width / 2)}px`
-		sourceDetail.animate(
-			[
-				{width:`${0}px`, height:`${0}px`, margin:`0`, transform:'translate(0,0)'},
-				{width:`${80}%`,height:`${50}%`, margin:`140px 10% 0 10%`, transform:`translate(${-1 * (selectedRect.x + + selectedRect.width / 2)}px,${-1 * (selectedRect.y + + selectedRect.height / 2)}px)`},
-			],{
-			duration: 600,
-			easing: 'linear',
-			fill: 'forwards'
-			}
-		)
+		// sourceDetail.style.top = `${parseInt(selectedRect.y + + selectedRect.height / 2)}px`
+		// sourceDetail.style.left = `${parseInt(selectedRect.x + selectedRect.width / 2)}px`
+		// sourceDetail.animate(
+		// 	[
+		// 		{width:`${0}px`, height:`${0}px`, margin:`0`, transform:'translate(0,0)'},
+		// 		{width:`${80}%`,height:`${50}%`, margin:`140px 10% 0 10%`, transform:`translate(${-1 * (selectedRect.x + + selectedRect.width / 2)}px,${-1 * (selectedRect.y + + selectedRect.height / 2)}px)`},
+		// 	],{
+		// 	duration: 600,
+		// 	easing: 'linear',
+		// 	fill: 'forwards'
+		// 	}
+		// )
 	
 		overlay.classList.add('visible')
 		sourceSelecterContainerList[index].classList.add('selected')
@@ -86,16 +86,16 @@ overlay.onclick = () => {
 		}
 	)
 
-	sourceDetail.animate(
-		[
-			{width:`${80}%`,height:`${50}%`, margin:`140px 10% 0 10%`, transform:`translate(${-1 * (selectedRect.x + + selectedRect.width / 2)}px,${-1 * (selectedRect.y + + selectedRect.height / 2)}px)`},
-			{width:`${0}px`, height:`${0}px`, margin:`0`, transform:'translate(0,0)'},
-		],{
-		duration: 600,
-    	easing: 'linear',
-    	fill: 'forwards'
-		}
-	)
+	// sourceDetail.animate(
+	// 	[
+	// 		{width:`${80}%`,height:`${50}%`, margin:`140px 10% 0 10%`, transform:`translate(${-1 * (selectedRect.x + + selectedRect.width / 2)}px,${-1 * (selectedRect.y + + selectedRect.height / 2)}px)`},
+	// 		{width:`${0}px`, height:`${0}px`, margin:`0`, transform:'translate(0,0)'},
+	// 	],{
+	// 	duration: 600,
+    // 	easing: 'linear',
+    // 	fill: 'forwards'
+	// 	}
+	// )
 	isSelectedMode = false
 
 }
@@ -127,17 +127,17 @@ sourceDecideBtn.onclick = () => {
 	)
 	
 	// selectedRect = sourceSelecterContainerList[selectedSourceIndex].getBoundingClientRect()
-	sourceDetail.animate(
-		[
-			{width:`${80}%`,height:`${50}%`, margin:`140px 10% 0 10%`, transform:`translate(${-1 * (selectedRect.x + selectedRect.width / 2)}px,${-1 * (selectedRect.y + selectedRect.height / 2)}px)`},
-			{width:`${0}px`, height:`${0}px`, margin:`140px 50% 0 50%`, transform:`translate(${-1 * (selectedRect.x + selectedRect.width / 2)}px,${-1 * (selectedRect.y + selectedRect.height)}px)`},
-		],{
-		duration: 300,
-    	easing: 'linear',
-    	fill: 'forwards'
-		}
+	// sourceDetail.animate(
+	// 	[
+	// 		{width:`${80}%`,height:`${50}%`, margin:`140px 10% 0 10%`, transform:`translate(${-1 * (selectedRect.x + selectedRect.width / 2)}px,${-1 * (selectedRect.y + selectedRect.height / 2)}px)`},
+	// 		{width:`${0}px`, height:`${0}px`, margin:`140px 50% 0 50%`, transform:`translate(${-1 * (selectedRect.x + selectedRect.width / 2)}px,${-1 * (selectedRect.y + selectedRect.height)}px)`},
+	// 	],{
+	// 	duration: 300,
+    // 	easing: 'linear',
+    // 	fill: 'forwards'
+	// 	}
 		
-	)
+	// )
 
 	overlay.classList.remove('visible')
 }
