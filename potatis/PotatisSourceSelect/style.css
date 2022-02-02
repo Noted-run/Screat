@@ -43,7 +43,6 @@
 	justify-content: center;
 	align-items: flex-end;
 	position: fixed;
-	transform-origin: 50% 50%;
 	z-index: 2;
 	width: 80%;
 	height:0;
@@ -63,7 +62,6 @@
 	border-radius:2em;
 	font-size:2em;
 	transition-duration: 0.4s;
-	transform-origin: top;
 	box-shadow: 5px 5px 12px #AAA;
 }
 #selected-source-detail > button:active{
