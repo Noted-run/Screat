@@ -6,6 +6,7 @@
 .source-selecter-container{
 	position:absolute;
 	z-index:0;
+	transition-duration: 0.8s;
 }
 
 .source-selecter{
@@ -48,6 +49,7 @@
 	height:0;
 	border-radius: 2em;
 	background-color:#FFF;
+	transition-duration: 0.8s;
 	will-change: transform;
 }
 

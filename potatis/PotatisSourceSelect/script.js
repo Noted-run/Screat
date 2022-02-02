@@ -32,32 +32,19 @@ const confirmSource = (index)=>{
 		if (selectedSourceIndex != -1)
 			sourceSelecterContainerList[selectedSourceIndex].classList.remove('selected')
 		selectedRect = sourceSelecterContainerList[index].getBoundingClientRect()
-		sourceSelecterContainerList[index].animate(
-			[
-				{width:`${selectedRect.width}px`,transform:'translate(0,0)', margin:`0`},
-				{width:'40%',transform:`translate(${-1 * selectedRect.x}px,${-1 * selectedRect.y}px)`,margin:`30px 30% 0 30%`}
-
-			],{
-			duration: 600,
-			easing: 'linear',
-			fill: 'forwards',
-			iterations: 1
-			}
-		)
+		sourceSelecterContainerList[index].style.width = '40%'
+		sourceSelecterContainerList[index].style.transform = `translate(${-1 * selectedRect.x}px,${-1 * selectedRect.y}px)`
+		sourceSelecterContainerList[index].style.margin = `30px 30% 0 30%`
 		
 		// ソース説明のアニメーション
+		sourceDetail.style.transitionDuration = `0.9s`
+		sourceDetail.style.transitionDelay = `0.2s`
 		sourceDetail.style.top = `${parseInt(selectedRect.y + + selectedRect.height / 2)}px`
 		sourceDetail.style.left = `${parseInt(selectedRect.x + selectedRect.width / 2)}px`
-		sourceDetail.animate(
-			[
-				{width:`${0}px`, height:`${0}px`, margin:`0`, transform:'translate(0,0)'},
-				{width:`${80}%`,height:`${50}%`, margin:`140px 10% 0 10%`, transform:`translate(${-1 * (selectedRect.x + + selectedRect.width / 2)}px,${-1 * (selectedRect.y + + selectedRect.height / 2)}px)`},
-			],{
-			duration: 600,
-			easing: 'linear',
-			fill: 'forwards'
-			}
-		)
+		sourceDetail.style.width = `${80}%`
+		sourceDetail.style.height = `${50}%`
+		sourceDetail.style.margin = `140px 10% 0 10%`
+		sourceDetail.style.transform = `translate(${-1 * (selectedRect.x + + selectedRect.width / 2)}px,${-1 * (selectedRect.y + + selectedRect.height / 2)}px)`
 	
 		overlay.classList.add('visible')
 		sourceSelecterContainerList[index].classList.add('selected')
@@ -73,29 +60,14 @@ const confirmSource = (index)=>{
 overlay.onclick = () => {
 	overlay.classList.remove('visible')
 
-	sourceSelecterContainerList[selectedSourceIndex].animate(
-		[
-			{width:'40%',transform:`translate(${-1 * selectedRect.x}px,${-1 * selectedRect.y}px)`,margin:`30px 30% 0 30%`},
-			{width:`${selectedRect.width}px`,transform:'translate(0,0)', margin:`0`}
-
-		],{
-		duration: 600,
-    	easing: 'linear',
-    	fill: 'forwards',
-		iterations: 1
-		}
-	)
-
-	sourceDetail.animate(
-		[
-			{width:`${80}%`,height:`${50}%`, margin:`140px 10% 0 10%`, transform:`translate(${-1 * (selectedRect.x + + selectedRect.width / 2)}px,${-1 * (selectedRect.y + + selectedRect.height / 2)}px)`},
-			{width:`${0}px`, height:`${0}px`, margin:`0`, transform:'translate(0,0)'},
-		],{
-		duration: 600,
-    	easing: 'linear',
-    	fill: 'forwards'
-		}
-	)
+	sourceSelecterContainerList[selectedSourceIndex].style.width = `${selectedRect.width}px`
+	sourceSelecterContainerList[selectedSourceIndex].style.transform = `translate(0,0)`
+	sourceSelecterContainerList[selectedSourceIndex].style.margin = `0`
+	
+	sourceDetail.style.width = `${0}px`
+	sourceDetail.style.height = `${0}px`
+	sourceDetail.style.margin = `0`
+	sourceDetail.style.transform = 'translate(0,0)'
 	isSelectedMode = false
 
 }
@@ -113,32 +85,16 @@ for(let i = 0; i < sourceSelecterContainerList.length; i++){
  * ソースが決められたとき
  */
 sourceDecideBtn.onclick = () => {
-	sourceSelecterContainerList[selectedSourceIndex].animate(
-		[
-			{width:'40%',transform:`translate(${-1 * selectedRect.x}px,${-1 * selectedRect.y}px)`,margin:`30px 30% 0 30%`},
-			{width:'22%',transform:`translate(${-1 * selectedRect.x}px,${window.innerHeight - selectedRect.y - selectedRect.height}px)`,margin:`0 0 5% 5%`},
-			
-		],{
-		duration: 1000,
-    	easing: 'linear',
-    	fill: 'forwards',
-		iterations: 1
-		}
-	)
-	
-	selectedRect = sourceSelecterContainerList[selectedSourceIndex].getBoundingClientRect()
-	sourceDetail.animate(
-		[
-			{width:`${80}%`,height:`${50}%`, margin:`140px 10% 0 10%`, transform:`translate(${-1 * (selectedRect.x + selectedRect.width / 2)}px,${-1 * (selectedRect.y + selectedRect.height / 2)}px)`},
-			{width:`${0}px`, height:`${0}px`, margin:`140px 50% 0 50%`, transform:`translate(${-1 * (selectedRect.x + selectedRect.width / 2)}px,${-1 * (selectedRect.y + selectedRect.height)}px)`},
-		],{
-		duration: 300,
-    	easing: 'linear',
-    	fill: 'forwards'
-		}
-		
-	)
+	sourceSelecterContainerList[selectedSourceIndex].style.width = '40%'
+	sourceSelecterContainerList[selectedSourceIndex].style.transform = `translate(${-1 * selectedRect.x}px,${window.innerHeight - selectedRect.y - selectedRect.height}px)`
+	sourceSelecterContainerList[selectedSourceIndex].style.margin = `0 0 5% 5%`
 
+	selectedRect = sourceSelecterContainerList[selectedSourceIndex].getBoundingClientRect()
+	sourceDetail.style.transitionDuration = `0.3s`
+	sourceDetail.style.width = `0px`
+	sourceDetail.style.height = `0px`
+	sourceDetail.style.margin = `140px 50% 0 50%`
+	sourceDetail.style.transform = `translate(${-1 * (selectedRect.x + selectedRect.width / 2)}px,${-1 * (selectedRect.y + selectedRect.height)}px)`
 	overlay.classList.remove('visible')
 }
 
