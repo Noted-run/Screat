@@ -9,8 +9,6 @@ let selectedSourceIndex = -1
 let selectedRect = null
 let isSelectedMode = false
 
-
-
 /**
  * 画面サイズを調整
  */
@@ -37,10 +35,13 @@ const confirmSource = (index)=>{
 		sourceSelecterContainerList[index].style.margin = `30px 30% 0 30%`
 		
 		// ソース説明のアニメーション
-		sourceDetail.style.transitionDuration = `0.9s`
-		sourceDetail.style.transitionDelay = `0.2s`
+		sourceDetail.style.transitionDuration = `0s`
+		sourceDetail.style.transitionDelay = `0s`
 		sourceDetail.style.top = `${parseInt(selectedRect.y + + selectedRect.height / 2)}px`
 		sourceDetail.style.left = `${parseInt(selectedRect.x + selectedRect.width / 2)}px`
+		
+		sourceDetail.style.transitionDuration = `0.9s`
+		sourceDetail.style.transitionDelay = `0.2s`
 		sourceDetail.style.width = `${80}%`
 		sourceDetail.style.height = `${50}%`
 		sourceDetail.style.margin = `140px 10% 0 10%`
@@ -90,6 +91,7 @@ sourceDecideBtn.onclick = () => {
 	sourceSelecterContainerList[selectedSourceIndex].style.margin = `0 0 5% 5%`
 
 	selectedRect = sourceSelecterContainerList[selectedSourceIndex].getBoundingClientRect()
+	sourceDetail.style.transitionDelay = `0s`
 	sourceDetail.style.transitionDuration = `0.3s`
 	sourceDetail.style.width = `0px`
 	sourceDetail.style.height = `0px`
