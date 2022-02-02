@@ -32,18 +32,18 @@ const confirmSource = (index)=>{
 		if (selectedSourceIndex != -1)
 			sourceSelecterContainerList[selectedSourceIndex].classList.remove('selected')
 		selectedRect = sourceSelecterContainerList[index].getBoundingClientRect()
-		// sourceSelecterContainerList[index].animate(
-		// 	[
-		// 		{width:`${selectedRect.width}px`,transform:'translate(0,0)', margin:`0`},
-		// 		{width:'40%',transform:`translate(${-1 * selectedRect.x}px,${-1 * selectedRect.y}px)`,margin:`30px 30% 0 30%`}
+		sourceSelecterContainerList[index].animate(
+			[
+				{width:`${selectedRect.width}px`,transform:'translate(0,0)', margin:`0`},
+				{width:'40%',transform:`translate(${-1 * selectedRect.x}px,${-1 * selectedRect.y}px)`,margin:`30px 30% 0 30%`}
 
-		// 	],{
-		// 	duration: 600,
-		// 	easing: 'linear',
-		// 	fill: 'forwards',
-		// 	iterations: 1
-		// 	}
-		// )
+			],{
+			duration: 600,
+			easing: 'linear',
+			fill: 'forwards',
+			iterations: 1
+			}
+		)
 		
 		// ソース説明のアニメーション
 		sourceDetail.style.top = `${parseInt(selectedRect.y + + selectedRect.height / 2)}px`
@@ -73,18 +73,18 @@ const confirmSource = (index)=>{
 overlay.onclick = () => {
 	overlay.classList.remove('visible')
 
-	// sourceSelecterContainerList[selectedSourceIndex].animate(
-	// 	[
-	// 		{width:'40%',transform:`translate(${-1 * selectedRect.x}px,${-1 * selectedRect.y}px)`,margin:`30px 30% 0 30%`},
-	// 		{width:`${selectedRect.width}px`,transform:'translate(0,0)', margin:`0`}
+	sourceSelecterContainerList[selectedSourceIndex].animate(
+		[
+			{width:'40%',transform:`translate(${-1 * selectedRect.x}px,${-1 * selectedRect.y}px)`,margin:`30px 30% 0 30%`},
+			{width:`${selectedRect.width}px`,transform:'translate(0,0)', margin:`0`}
 
-	// 	],{
-	// 	duration: 600,
-    // 	easing: 'linear',
-    // 	fill: 'forwards',
-	// 	iterations: 1
-	// 	}
-	// )
+		],{
+		duration: 600,
+    	easing: 'linear',
+    	fill: 'forwards',
+		iterations: 1
+		}
+	)
 
 	sourceDetail.animate(
 		[
@@ -113,18 +113,18 @@ for(let i = 0; i < sourceSelecterContainerList.length; i++){
  * ソースが決められたとき
  */
 sourceDecideBtn.onclick = () => {
-	// sourceSelecterContainerList[selectedSourceIndex].animate(
-	// 	[
-	// 		{width:'40%',transform:`translate(${-1 * selectedRect.x}px,${-1 * selectedRect.y}px)`,margin:`30px 30% 0 30%`},
-	// 		{width:'22%',transform:`translate(${-1 * selectedRect.x}px,${window.innerHeight - selectedRect.y - selectedRect.height}px)`,margin:`0 0 5% 5%`},
+	sourceSelecterContainerList[selectedSourceIndex].animate(
+		[
+			{width:'40%',transform:`translate(${-1 * selectedRect.x}px,${-1 * selectedRect.y}px)`,margin:`30px 30% 0 30%`},
+			{width:'22%',transform:`translate(${-1 * selectedRect.x}px,${window.innerHeight - selectedRect.y - selectedRect.height}px)`,margin:`0 0 5% 5%`},
 			
-	// 	],{
-	// 	duration: 1000,
-    // 	easing: 'linear',
-    // 	fill: 'forwards',
-	// 	iterations: 1
-	// 	}
-	// )
+		],{
+		duration: 1000,
+    	easing: 'linear',
+    	fill: 'forwards',
+		iterations: 1
+		}
+	)
 	
 	selectedRect = sourceSelecterContainerList[selectedSourceIndex].getBoundingClientRect()
 	sourceDetail.animate(

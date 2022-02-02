@@ -13,6 +13,7 @@
 	animation-timing-function: ease;
 	animation-iteration-count: infinite;
 	filter: drop-shadow(7px 7px 8px #AAA);
+	will-change: transform;
 }
 
 .fuwafuwa-1{
@@ -48,6 +49,7 @@
 	height:0;
 	border-radius: 2em;
 	background-color:#FFF;
+	will-change: transform;
 }
 
 #selected-source-detail > button {
