@@ -9,19 +9,36 @@ let selectedSourceIndex = -1
 let selectedRect = null
 let isSelectedMode = false
 
-const baseAnimDuration = '0.8s'
+let centerX = 0 
+let centerY = 0
+
+let moveX = 0
+let moveY = 0
+
+const baseAnimDuration = '1.5s'
+const selectedSourceSize = window.innerWidth * 0.4
+const choicedSourceSize = window.innerWidth * 0.2
 
 /**
  * 画面サイズを調整
  */
 fitWindowSize = (event) => {
+	let height = 0
 	if(window.innerWidth > window.innerHeight){
-		sourceObjectOuter.style.height = `${parseInt(640 / 440 * window.innerWidth)}px`
+		height = parseInt(640 / 440 * window.innerWidth)
 	}
 	else if(window.innerWidth * 2 > window.innerHeight)
-		sourceObjectOuter.style.height = `${parseInt(window.innerHeight)}px`
+		height = parseInt(window.innerHeight)
 	else
-		sourceObjectOuter.style.height = `${parseInt(440 / 620 *  window.innerHeight)}px`
+		height = parseInt(440 / 620 *  window.innerHeight)
+
+	sourceObjectOuter.style.height = `${height}px`
+	centerX = document.body.clientWidth / 2 
+	centerY = height / 2
+}
+
+const getTransformStyle = (transX, transY, scale) => {
+	return `translate(${parseInt(transX)}px,${parseInt(transY)}px) scale(${scale.toFixed(1)})`
 }
 
 /**
@@ -33,32 +50,32 @@ const confirmSource = (index)=>{
 			sourceSelecterContainerList[selectedSourceIndex].classList.remove('selected')
 		selectedRect = sourceSelecterContainerList[index].getBoundingClientRect()
 
+		moveX = centerX - selectedRect.x - sourceSelecterContainerList[index].clientWidth / 2
+		moveY = 60 - selectedRect.y
+
 		/*即変化が必要なものは0sで変化させる */
 		sourceSelecterContainerList[index].style.transitionDuration = '0s'
 		sourceDetail.style.transitionDuration = `0s`
 		sourceSelecterContainerList[index].style.zIndex = '5'
-		sourceDetail.style.top = `${parseInt(selectedRect.y + + selectedRect.height / 2)}px`
-		sourceDetail.style.left = `${parseInt(selectedRect.x + selectedRect.width / 2)}px`
-		sourceDetail.style.width = `0%`
-		sourceDetail.style.height = `0%`
+		sourceDetail.style.top = `${selectedRect.y + selectedRect.height / 2}px`
+		sourceDetail.style.left = `${selectedRect.x}px`
+		sourceDetail.style.transform = getTransformStyle(0, 0, 0)	
 
 		/*アニメーション的な変化は遅延をかける */
 		setTimeout(() => {
 			sourceSelecterContainerList[index].style.transitionDuration = baseAnimDuration
+			sourceSelecterContainerList[index].style.transform = getTransformStyle(moveX, moveY, selectedSourceSize / selectedRect.width)	
+			sourceDetailRect = sourceDetail.getBoundingClientRect()
 			sourceDetail.style.transitionDuration = baseAnimDuration
+			sourceDetail.style.transform = getTransformStyle(
+				centerX - (sourceDetailRect.x + sourceDetailRect.width / 2),
+				moveY, 
+				1)		
+		}, 100)
 
-			sourceSelecterContainerList[index].style.width = '40%'
-			sourceSelecterContainerList[index].style.transform = `translate(${-1 * selectedRect.x}px,${-1 * selectedRect.y}px)`
-			sourceSelecterContainerList[index].style.margin = `30px 30% 0 30%`
-			sourceDetail.style.width = `${80}%`
-			sourceDetail.style.height = `${50}%`
-			sourceDetail.style.margin = `140px 10% 0 10%`
-			sourceDetail.style.transform = `translate(${-1 * (selectedRect.x + + selectedRect.width / 2)}px,${-1 * (selectedRect.y + + selectedRect.height / 2)}px)`
-		}, 50);
 		overlay.classList.add('visible')
 		sourceSelecterContainerList[index].classList.add('selected')
-
-		selectedSourceIndex  = index //対象を記録
+		selectedSourceIndex  = index 
 		isSelectedMode = true
 	}
 }
@@ -68,17 +85,30 @@ const confirmSource = (index)=>{
  */
 overlay.onclick = () => {
 	overlay.classList.remove('visible')
-
 	sourceDetail.style.transitionDuration = baseAnimDuration
-
-	sourceSelecterContainerList[selectedSourceIndex].style.width = `${selectedRect.width}px`
-	sourceSelecterContainerList[selectedSourceIndex].style.transform = `translate(0,0)`
-	sourceSelecterContainerList[selectedSourceIndex].style.margin = `0`
-	sourceDetail.style.width = `${0}px`
-	sourceDetail.style.height = `${0}px`
-	sourceDetail.style.margin = `0`
-	sourceDetail.style.transform = 'translate(0,0)'
+	sourceSelecterContainerList[selectedSourceIndex].style.transform = getTransformStyle(0,0,1.0)
+	sourceDetail.style.transform = getTransformStyle(0,0,0)
 	isSelectedMode = false
+	sourceSelecterContainerList[selectedSourceIndex].style.zIndex = '0'
+}
+
+
+/**
+ * ソースが決められたとき
+ */
+sourceDecideBtn.onclick = () => {
+	selectedRect = sourceSelecterContainerList[selectedSourceIndex].getBoundingClientRect()
+	console.log(selectedRect.y)
+	sourceSelecterContainerList[selectedSourceIndex].style.transform = getTransformStyle(
+		moveX - centerX * 0.8,
+		moveY + (window.innerHeight - selectedRect.y) * 0.8, 
+		choicedSourceSize / selectedRect.width)
+	sourceDetail.style.transform = getTransformStyle(
+		centerX - (sourceDetailRect.x + sourceDetailRect.width / 2),
+		moveY, 
+		0)
+	overlay.classList.remove('visible')
+	sourceSelecterContainerList[selectedSourceIndex].style.zIndex = '10'
 }
 
 for(let i = 0; i < sourceSelecterContainerList.length; i++){
@@ -89,24 +119,6 @@ for(let i = 0; i < sourceSelecterContainerList.length; i++){
 		}
 	})(i)
 }
-
-/**
- * ソースが決められたとき
- */
-sourceDecideBtn.onclick = () => {
-	sourceSelecterContainerList[selectedSourceIndex].style.width = '40%'
-	sourceSelecterContainerList[selectedSourceIndex].style.transform = `translate(${-1 * selectedRect.x}px,${window.innerHeight - selectedRect.y - selectedRect.height}px)`
-	sourceSelecterContainerList[selectedSourceIndex].style.margin = `0 0 5% 5%`
-
-	selectedRect = sourceSelecterContainerList[selectedSourceIndex].getBoundingClientRect()
-	sourceDetail.style.transitionDuration = `0.3s`
-	sourceDetail.style.width = `0px`
-	sourceDetail.style.height = `0px`
-	sourceDetail.style.margin = `140px 50% 0 50%`
-	sourceDetail.style.transform = `translate(${-1 * (selectedRect.x + selectedRect.width / 2)}px,${-1 * (selectedRect.y + selectedRect.height)}px)`
-	overlay.classList.remove('visible')
-}
-
 fitWindowSize(null)
 window.addEventListener('resize',fitWindowSize)
 

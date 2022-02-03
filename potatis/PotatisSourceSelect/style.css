@@ -1,22 +1,20 @@
 #source-select-outer{
 	width:100%;
 	position:relative;
+	
 }
 
 .source-selecter-container{
 	position:absolute;
 	z-index:0;
-	transition-duration: 0.8s;
-	transition-timing-function: linear;
-	will-change: width,margin,transform;
+	transition-timing-function:cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 .source-selecter{
 	animation-duration: 2s;
-	animation-timing-function: ease;
+	animation-timing-function:ease-in-out;
 	animation-iteration-count: infinite;
 	filter: drop-shadow(7px 7px 8px #AAA);
-	will-change: width,height,margin,transform;
 }
 
 .fuwafuwa-1{
@@ -46,14 +44,17 @@
 	justify-content: center;
 	align-items: flex-end;
 	position: fixed;
+	transform-origin: center;
 	z-index: 2;
 	width: 80%;
-	height:0;
+	height:80%;
+	top:0px;
+	left:0px;
 	border-radius: 2em;
 	background-color:#FFF;
-	transition-duration: 0.8s;
-	will-change: transform;
-	transition-timing-function: linear;
+	transform-origin: top center;
+	transition-timing-function:cubic-bezier(0.075, 0.82, 0.165, 1);
+	transform:scale(0)
 }
 
 #selected-source-detail > button {
