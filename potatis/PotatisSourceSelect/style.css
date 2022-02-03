@@ -7,7 +7,7 @@
 .source-selecter-container{
 	position:absolute;
 	z-index:0;
-	transition-timing-function:cubic-bezier(0.075, 0.82, 0.165, 1);
+	transition-timing-function:ease-in-out;
 }
 
 .source-selecter{
@@ -40,7 +40,6 @@
 
 #selected-source-detail{
 	display: flex;
-	overflow: hidden;
 	justify-content: center;
 	align-items: flex-end;
 	position: fixed;
@@ -53,7 +52,7 @@
 	border-radius: 2em;
 	background-color:#FFF;
 	transform-origin: top center;
-	transition-timing-function:cubic-bezier(0.075, 0.82, 0.165, 1);
+	transition-timing-function:ease-in-out;
 	transform:scale(0)
 }
 

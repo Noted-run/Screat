@@ -15,7 +15,7 @@ let centerY = 0
 let moveX = 0
 let moveY = 0
 
-const baseAnimDuration = '1.5s'
+const baseAnimDuration = '1.2s'
 const selectedSourceSize = window.innerWidth * 0.4
 const choicedSourceSize = window.innerWidth * 0.2
 
@@ -57,9 +57,11 @@ const confirmSource = (index)=>{
 		sourceSelecterContainerList[index].style.transitionDuration = '0s'
 		sourceDetail.style.transitionDuration = `0s`
 		sourceSelecterContainerList[index].style.zIndex = '5'
-		sourceDetail.style.top = `${selectedRect.y + selectedRect.height / 2}px`
-		sourceDetail.style.left = `${selectedRect.x}px`
-		sourceDetail.style.transform = getTransformStyle(0, 0, 0)	
+		sourceDetail.style.transform = `scale(1)`
+		sourceDetail.style.transform = getTransformStyle(
+			selectedRect.x + selectedRect.width/ 2 - document.body.clientWidth * 0.8 /2, 
+			selectedRect.y + selectedRect.height / 2,
+			0)	
 
 		/*アニメーション的な変化は遅延をかける */
 		setTimeout(() => {
@@ -68,8 +70,8 @@ const confirmSource = (index)=>{
 			sourceDetailRect = sourceDetail.getBoundingClientRect()
 			sourceDetail.style.transitionDuration = baseAnimDuration
 			sourceDetail.style.transform = getTransformStyle(
-				centerX - (sourceDetailRect.x + sourceDetailRect.width / 2),
-				moveY, 
+				centerX - document.body.clientWidth * 0.8 /2,
+				selectedRect.y + moveY, 
 				1)		
 		}, 100)
 
@@ -104,8 +106,8 @@ sourceDecideBtn.onclick = () => {
 		moveY + (window.innerHeight - selectedRect.y) * 0.8, 
 		choicedSourceSize / selectedRect.width)
 	sourceDetail.style.transform = getTransformStyle(
-		centerX - (sourceDetailRect.x + sourceDetailRect.width / 2),
-		moveY, 
+		centerX - document.body.clientWidth * 0.8 /2,
+		window.innerHeight * 0.3, 
 		0)
 	overlay.classList.remove('visible')
 	sourceSelecterContainerList[selectedSourceIndex].style.zIndex = '10'
