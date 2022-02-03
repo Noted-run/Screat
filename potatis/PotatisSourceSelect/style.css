@@ -8,7 +8,7 @@
 	z-index:0;
 	transition-duration: 0.8s;
 	transition-timing-function: linear;
-	will-change: transform;
+	will-change: width,margin,transform;
 }
 
 .source-selecter{
@@ -16,7 +16,7 @@
 	animation-timing-function: ease;
 	animation-iteration-count: infinite;
 	filter: drop-shadow(7px 7px 8px #AAA);
-	will-change: transform;
+	will-change: width,height,margin,transform;
 }
 
 .fuwafuwa-1{
