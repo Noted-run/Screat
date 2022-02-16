@@ -1,0 +1,12 @@
+{
+  "name": "404",
+  "version": "1.0.0",
+  "description": "",
+  "main": "matter.js",
+  "scripts": {
+    "dev": "webpack serve",
+    "build": "webpack --mode production"
+  },
+  "author": "",
+  "license": "ISC"
+}
