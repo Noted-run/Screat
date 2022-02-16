@@ -1,0 +1,23 @@
+{
+  "name": "screat",
+  "version": "1.0.0",
+  "description": "Web Modules Powered by Noted.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Noted-run/Screat.git"
+  },
+  "author": "Noted",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Noted-run/Screat/issues"
+  },
+  "homepage": "https://github.com/Noted-run/Screat#readme",
+  "devDependencies": {
+    "webpack": "^5.69.0",
+    "webpack-cli": "^4.9.2"
+  }
+}
