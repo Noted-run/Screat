@@ -39,7 +39,7 @@ npm run build
 
 ### `~`エイリアス
 
-画像のURLとして`~`エイリアスが有効。
+resourceのURLとして`~`エイリアスが有効。
 ```js:例
 import img from '~/resource/crush.svg';
 console.log(img);
