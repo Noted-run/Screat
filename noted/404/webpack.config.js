@@ -31,10 +31,28 @@ module.exports = {
                 ]
               ]
             }
-          }
+          },
         ]
-      }
+      },
+      {
+          test: /\.(png|jpg|gif|svg)$/i,
+          use: [
+            {
+              loader: 'url-loader',
+              options: {
+                limit: 8192,
+                name:'./resource/[name].[ext]'
+              }
+            },
+          ],
+        type: 'javascript/auto'
+      },
     ]
+  },
+  resolve:{
+    alias: {
+      '~': path.resolve(__dirname,'public')
+    }
   },
   plugins: [
     new HtmlWebpackPlugin({ 
