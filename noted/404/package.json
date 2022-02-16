@@ -8,5 +8,8 @@
     "build": "webpack --mode production"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "matter-js": "^0.18.0"
+  }
 }
