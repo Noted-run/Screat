@@ -11,6 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "@types/matter-js": "^0.17.7",
-    "matter-js": "^0.18.0"
+    "matter-js": "^0.18.0",
+    "pathseg": "^1.2.1",
+    "poly-decomp": "^0.3.0"
   }
 }
