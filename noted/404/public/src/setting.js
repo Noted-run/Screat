@@ -1,6 +1,6 @@
 import Matter from "matter-js"
 // svgレンダリングに必要１
-import * as pathseg from "./plugins/pathseg" 
+require('pathseg')
 
 const Common = Matter.Common
 const Engine = Matter.Engine
@@ -62,32 +62,6 @@ const mouseConstraint = MouseConstraint.create(engine, {
 Composite.add(world, mouseConstraint);
 render.mouse = mouse;
 
-var select = function(root, selector) {
-    return Array.prototype.slice.call(root.querySelectorAll(selector));
-};
-var loadSvg = function(url) {
-    return fetch(url)
-        .then(function(response) { return response.text(); })
-        .then(function(raw) { return (new window.DOMParser()).parseFromString(raw, 'image/svg+xml'); });
-};
-
-loadSvg('./resource/crush.svg').then(function(root) {
-    var color = Common.choose(['#f19648', '#f5d259', '#f55a3c', '#063e7b', '#ececd1']);
-    
-    var vertexSets = select(root, 'path')
-        .map(function(path) { 
-            return Svg.pathToVertices(path); 
-        });
-    
-    Composite.add(world, Bodies.fromVertices(400, 80, vertexSets, {
-        render: {
-            fillStyle: color,
-            strokeStyle: color,
-            lineWidth: 1
-        }
-    }, true));
-});
-
 
 // function addComposite(...bodies){
 // 	Composite.add(world, bodies)
@@ -101,15 +75,17 @@ function runRender(){
 	Runner.run(runner, engine)
 }
 
-
 export {
+    render,
+    world,
+    Common,
 	Engine,
 	Render,
 	Runner,
 	Bodies,
 	Composite,
 	Mouse,
-	// addComposite,
+    Svg,
 	runRender}
 
 
