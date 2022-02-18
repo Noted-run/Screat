@@ -5,7 +5,7 @@
   "main": "matter.js",
   "scripts": {
     "dev": "webpack serve",
-    "clean":"rimraf dist",
+    "clean": "rimraf dist",
     "build": "npm run clean & webpack --mode production"
   },
   "author": "",
