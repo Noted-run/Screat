@@ -1,11 +1,11 @@
 
-import {Common,Svg,world,Bodies,Composite} from "./setting"
+import {Common,Svg,world,Body,Bodies,Composite,Vertices} from "./setting"
 
-const select = function(root, selector) {
-	return Array.prototype.slice.call(root.querySelectorAll(selector));
+const getSvgDomList = function(root, selector) {
+	return root.querySelectorAll(selector);
 }
 
-var loadSvg = function(url) {
+const loadSvg = function(url) {
     return fetch(url)
         .then(function(response) { return response.text(); })
         .then(function(raw) { return (new window.DOMParser()).parseFromString(raw, 'image/svg+xml'); });
@@ -14,22 +14,20 @@ var loadSvg = function(url) {
 export function create404Obj(svgPath , posX = 400, posY = 80){
 	loadSvg(svgPath)
 	.then(function(root) {
-		const color = Common.choose(['#f19648', '#f5d259', '#f55a3c', '#063e7b', '#ececd1']);
-
-		const vertexSets = select(root, 'path')
+		const SvgDomList = getSvgDomList(root, 'path')
+		const vertexSets = Array.prototype.slice.call(SvgDomList)
 							.map(function(path) { return Svg.pathToVertices(path); });
-
-		const bodies = Bodies.fromVertices(posX, posY, vertexSets, {
-			render: {
-				fillStyle: color,
-				strokeStyle: color,
-				lineWidth: 1
-			}
-		})
-		// const part = Bodies.
-		console.log(bodies.parts)
-		Composite.add(world, bodies);
 		
+		const bodies = Bodies.fromVertices(posX, posY, vertexSets)
+		for(let i = 1; i  < bodies.parts.length; i++){
+			const shape = {
+				label: 'Shape Body' + i,
+				position: bodies.parts[i].position,
+				vertices: bodies.parts[i].vertices,
+			};
+			const body = Body.create(Common.extend({}, shape))
+			Composite.add(world, body);
+		}
 	})
 	
 }

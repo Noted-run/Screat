@@ -5,7 +5,6 @@ import { create404Obj } from "./stage"
 	window.onload = () => {
 		// main
 		create404Obj(svg404Path)
-		
 		runRender()
 		
 	}
