@@ -5,7 +5,8 @@
   "main": "matter.js",
   "scripts": {
     "dev": "webpack serve",
-    "build": "webpack --mode production"
+    "clean":"rimraf dist",
+    "build": "npm run clean & webpack --mode production"
   },
   "author": "",
   "license": "ISC",
@@ -13,6 +14,7 @@
     "@types/matter-js": "^0.17.7",
     "matter-js": "^0.18.0",
     "pathseg": "^1.2.1",
-    "poly-decomp": "^0.3.0"
+    "poly-decomp": "^0.3.0",
+    "screat": "file:../../.."
   }
 }
