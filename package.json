@@ -4,7 +4,7 @@
   "description": "Web Modules Powered by Noted.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:noted/404":"npm -prefix ./noted/404 run build & cpx -C ./noted/404/** ./demo/noted/**"
   },
   "repository": {
     "type": "git",

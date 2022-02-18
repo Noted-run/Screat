@@ -26,8 +26,9 @@ export function create404Obj(svgPath , posX = 400, posY = 80){
 				lineWidth: 1
 			}
 		})
-
-		Composite.add(world, bodies, true);
+		// const part = Bodies.
+		console.log(bodies.parts)
+		Composite.add(world, bodies);
 		
 	})
 	

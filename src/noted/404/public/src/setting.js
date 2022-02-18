@@ -62,12 +62,10 @@ const mouseConstraint = MouseConstraint.create(engine, {
 Composite.add(world, mouseConstraint);
 render.mouse = mouse;
 
-
-// function addComposite(...bodies){
-// 	Composite.add(world, bodies)
-// }
-
-
+const stageBodies = [
+    Bodies.rectangle(400, 610, 810, 60, { isStatic: true })
+]
+Composite.add(world, stageBodies)
 
 function runRender(){
 	Render.run(render)
