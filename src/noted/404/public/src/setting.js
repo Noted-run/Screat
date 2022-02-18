@@ -26,11 +26,11 @@ const debugOption = {
     background: '#fafafa',
     wireframeBackground: '#222',
     hasBounds: true,
-    enabled: false,
-    wireframes: false,
+    enabled: true,
+    wireframes: true,
     showSleeping: true,
     showDebug: true,
-    showBroadphase: false,
+    showBroadphase: true,
     showBounds: true,
     showVelocity: true,
     showCollisions: true,
@@ -46,9 +46,37 @@ const debugOption = {
     showMousePosition: false
 }
 
+const productOption = {
+    width: 800,
+    height: 600,
+    pixelRatio: 1,
+    background: '#fafafa',
+    wireframeBackground: '#222',
+    hasBounds: false,
+    enabled: false,
+    wireframes: false,
+    showSleeping: true,
+    showDebug: false,
+    showBroadphase: false,
+    showBounds: false,
+    showVelocity: false,
+    showCollisions: false,
+    showSeparations: false,
+    showAxes: false,
+    showPositions: false,
+    showAngleIndicator: false,
+    showIds: false,
+    showShadows: true,
+    showVertexNumbers: false,
+    showConvexHulls: false,
+    showInternalEdges: false,
+    showMousePosition: false
+}
+
 const render = Render.create({
     element: document.body,
     engine: engine,
+    options:productOption
 });
 
 const mouse = Mouse.create(render.canvas)
