@@ -1,3 +1,4 @@
+import img from '~/resource/crush.svg';
 import Matter from "matter-js"
 // svgレンダリングに必要１
 require('pathseg')
